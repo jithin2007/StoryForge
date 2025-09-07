@@ -2,7 +2,7 @@
 // Dynamic frontend with comprehensive error handling and progress tracking
 
 // Configuration
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://storyforge-pcf2.onrender.com/';
 let currentStory = null;
 let storyGallery = [];
 let progressInterval = null;
