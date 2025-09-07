@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryForge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-magic"></i>
+                <span>Story Forge</span>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-btn active" data-section="home">Home</button>
+                <button class="nav-btn" data-section="create">Create Story</button>
+                <button class="nav-btn" data-section="gallery">Gallery</button>
+                <button class="nav-btn" data-section="about">About</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 id="loadingText">Crafting your story...</h3>
+            <p id="loadingSubtext">Creating unique narrative</p>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div id="progressText" class="progress-text">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Create Stories with LLM</h1>
+                <p class="hero-subtitle">Transform your ideas into illustrated narratives using cutting-edge Tech • Free to use • Unlimited creativity</p>
+
+                <div class="hero-features">
+                    <div class="feature-pill">
+                        <i class="fas fa-infinity"></i>
+                        <span>No Usage Limits</span>
+                    </div>
+                    <div class="feature-pill">
+                        <i class="fas fa-image"></i>
+                        <span>Free Image Generation</span>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Stories Possible</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">AI</div>
+                        <div class="stat-label">Powered</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">Free</div>
+                        <div class="stat-label">To Use</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="showSection('create')">
+                        <i class="fas fa-rocket"></i> Start Creating
+                    </button>
+                    <button class="btn-secondary" onclick="showDemo()">
+                        <i class="fas fa-play"></i> Try Demo
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="hero-preview">
+                    <div class="preview-scene">
+                        <img src="https://www.rollingstone.com/wp-content/uploads/2023/04/elon-musk-RS-1800.jpg?w=1581&h=1054&crop=1" alt="AI Story Preview" class="preview-img">
+                        <div class="preview-text">
+                            <h4>"This Hackacthon Is Crazyyyy"</h4>
+                            <p>So Is This Project</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2 class="features-title">Why Choose StoryForge?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon google-gradient">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h3>Google Gemini LLM</h3>
+                    <p>Powered by Google's most advanced language model for superior storytelling and creativity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon unlimited-gradient">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>No Usage Limits</h3>
+                    <p>Create unlimited stories without worrying about quotas or running out of credits</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon image-gradient">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Free Image Generation</h3>
+                    <p>Every scene gets beautiful custom illustrations using free AI image generation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon genre-gradient">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Multiple Genres</h3>
+                    <p>Fantasy, Sci-Fi, Mystery, Adventure, Romance, Horror, Comedy, and Drama</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon speed-gradient">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate complete illustrated stories in under 2 minutes with optimized AI</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon quality-gradient">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Professional Quality</h3>
+                    <p>Stories are coherent, engaging, and suitable for any audience you choose</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Story Section -->
+    <section id="create" class="section">
+        <div class="create-container">
+            <div class="create-header">
+                <h2>Create Your AI Story</h2>
+                <p>Powered by Google's LLM - Transform any idea into an illustrated narrative</p>
+                <div class="api-status" id="apiStatus">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <span>Checking API connection...</span>
+                </div>
+            </div>
+
+            <div class="create-form">
+                <div class="form-group">
+                    <label for="storyPrompt">Story Idea</label>
+                    <textarea id="storyPrompt" 
+                              placeholder="A young astronaut discovers a planet where time moves backwards..."
+                              rows="4"></textarea>
+                    <div class="form-help">💡 Tip: Be descriptive! Include characters, settings, and conflicts for richer stories.</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select id="genre">
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Sci-Fi">Science Fiction</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tone">Tone</label>
+                        <select id="tone">
+                            <option value="Epic">Epic & Grand</option>
+                            <option value="Light">Light & Playful</option>
+                            <option value="Dark">Dark & Mysterious</option>
+                            <option value="Humorous">Humorous</option>
+                            <option value="Dramatic">Dramatic</option>
+                            <option value="Romantic">Romantic</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audience">Audience</label>
+                        <select id="audience">
+                            <option value="Kids">Kids (5-10)</option>
+                            <option value="Teens">Teens (11-17)</option>
+                            <option value="Adults">Adults (18+)</option>
+                            <option value="All Ages">All Ages</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scenes">Scenes</label>
+                        <select id="scenes">
+                            <option value="3">3 Scenes</option>
+                            <option value="4">4 Scenes</option>
+                            <option value="5">5 Scenes</option>
+                            <option value="6">6 Scenes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-primary btn-large" id="generateBtn" onclick="generateStory()">
+                        <i class="fab fa-google"></i> Generate Story
+                    </button>
+                    <button class="btn-secondary" onclick="clearForm()">
+                        <i class="fas fa-refresh"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Story Display -->
+            <div id="storyDisplay" class="story-display hidden">
+                <div class="story-header">
+                    <h3 id="storyTitle">Your AI-Generated Story</h3>
+                    <div class="story-meta">
+                        <span id="storyGenre" class="meta-tag"></span>
+                        <span id="storyTone" class="meta-tag"></span>
+                        <span id="storyAudience" class="meta-tag"></span>
+                        <span class="meta-tag gemini-tag">
+                            <i class="fab fa-google"></i> Generated by AI
+                        </span>
+                    </div>
+                </div>
+
+                <div id="storyScenes" class="story-scenes">
+                    <!-- Scenes will be dynamically populated here -->
+                </div>
+
+                <div class="story-actions">
+                    <button class="btn-secondary" onclick="regenerateImages()">
+                        <i class="fas fa-image"></i> New Images
+                    </button>
+                    <button class="btn-secondary" onclick="exportStory()">
+                        <i class="fas fa-download"></i> Export PDF
+                    </button>
+                    <button class="btn-primary" onclick="showSection('create'); clearStory()">
+                        <i class="fas fa-plus"></i> Create Another
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h2>Your Story Gallery</h2>
+                <p>Stories created AI</p>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-card placeholder">
+                    <div class="gallery-image">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="gallery-content">
+                        <h4>Create your first story</h4>
+                        <p>Stories you generate will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-container">
+            <div class="about-header">
+                <h2>About StoryForge AI</h2>
+                <p>Advanced storytelling powered by LLM's</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>🚀 Revolutionary AI Technology</h3>
+                    <p>StoryForge AI harnesses the power of Google Gemini, one of the world's most advanced language models, to create compelling, illustrated stories from simple prompts.</p>
+
+                    <h3>✨ How It Works</h3>
+                    <ol>
+                        <li><strong>Input:</strong> Share your story idea and preferences</li>
+                        <li><strong>AI Generation:</strong> Google Gemini creates a multi-scene narrative</li>
+                        <li><strong>Illustration:</strong> Each scene gets custom AI-generated images</li>
+                        <li><strong>Enjoy:</strong> Read and share your illustrated story</li>
+                    </ol>
+
+                    <h3>🌟 Key Features</h3>
+                    <ul>
+                        <li>Multiple genres: Fantasy, Sci-Fi, Mystery, Adventure, Romance, Horror, Comedy, Drama</li>
+                        <li>Customizable tone and audience targeting</li>
+                        <li>3-6 scenes per story with dynamic length</li>
+                        <li>Free AI image generation for every scene</li>
+                        <li>Story gallery with local storage</li>
+                        <li>No usage limits or quotas</li>
+                        <li>Professional-quality narratives</li>
+                    </ul>
+
+                    <h3>🔒 Privacy & Security</h3>
+                    <p>Your stories are generated in real-time and stored locally in your browser. We don't save or share your creative content.</p>
+                </div>
+
+                <div class="about-tech">
+                    <h3>Powered By</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item main-tech">
+                            <i class="fab fa-google"></i>
+                            <span>Google Gemini</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-image"></i>
+                            <span>Hugging Face</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-server"></i>
+                            <span>Node.js + Express</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-code"></i>
+                            <span>Modern JavaScript</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message hidden">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Story generated successfully!</span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage" class="error-message hidden">
+        <div class="error-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText">An error occurred</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
