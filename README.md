@@ -25,10 +25,10 @@ Generate immersive multi-scene fantasy stories with corresponding AI-generated i
 ### Installation
 
 Clone the repository
-git clone https://github.com/your-username/storyforge-ai-gemini-complete.git
+git clone https://github.com/jithin2007/StoryForge.git
 
 Navigate to backend directory
-cd storyforge-ai-gemini-complete/backend
+cd StoryForge/backend
 
 Install dependencies
 npm install
